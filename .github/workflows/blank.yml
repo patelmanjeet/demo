@@ -48,21 +48,21 @@ jobs:
       - name: run docker container 1
         run: |
           docker run -t --rm \
-          -v "/deployment:/deployment" \
+          -v /deployment:/deployment \
           busybox /bin/sh -c "ls -l /deployment/"
 
       # Runs a single command using the runners shell
       - name: run docker container 2
         run: |
           docker run -t --rm \
-          -v "$(pwd)"/mountdata:/deployment" \
+          -v /deployment:/deployment \
           busybox /bin/sh -c "ls -l > /deployment/ls.txt"
 
       # Runs a single command using the runners shell
       - name: run docker container 3
         run: |
           docker run -t --rm \
-          -v "$(pwd)"/mountdata:/deployment" \
+          -v /deployment:/deployment \
           busybox /bin/sh -c "ps aux > /deployment/ps.txt"
 
       # Runs a single command using the runners shell

@@ -22,7 +22,7 @@ jobs:
     container:
       image: docker
       volumes:
-        - $PWD/mountdata
+        - /deployment:/deployment
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:

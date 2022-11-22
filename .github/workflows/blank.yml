@@ -31,15 +31,27 @@ jobs:
       - name: Run a one-line script
         run: mkdir -p $PWD/mount
 
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo "test" > $PWD/mount/fromhost.txt
+
       # Runs a single command using the runners shell
       - name: run docker container 1
+        run: |
+          docker run -t --rm \
+          -v "$(pwd)"/mount:/deployment \
+          busybox /bin/sh -c "ls -l /deployment/"
+
+      # Runs a single command using the runners shell
+      - name: run docker container 2
         run: |
           docker run -t --rm \
           -v "$(pwd)"/mount:/deployment \
           busybox /bin/sh -c "ls -l > /deployment/ls.txt"
 
       # Runs a single command using the runners shell
-      - name: run docker container 2
+      - name: run docker container 3
         run: |
           docker run -t --rm \
           -v "$(pwd)"/mount:/deployment \

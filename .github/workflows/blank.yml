@@ -21,6 +21,8 @@ jobs:
     runs-on: ubuntu-latest
     container:
       image: docker
+      volumes:
+        - $PWD/mountdata
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -29,34 +31,34 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo $PWD
+        run: ls -l $PWD
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo "test" > $PWD/mount/fromhost.txt
+        run: echo "test" > $PWD/mountdata/fromhost.txt
 
       # Runs a single command using the runners shell
       - name: run docker container 1
         run: |
           docker run -t --rm \
-          --mount type=volume,dst=/deployment,volume-driver=local,volume-opt=type=none,volume-opt=o=bind,volume-opt=device="$(pwd)"/mount \
+          -v "$(pwd)"/mountdata:/deployment \
           busybox /bin/sh -c "ls -l /deployment/"
 
       # Runs a single command using the runners shell
       - name: run docker container 2
         run: |
           docker run -t --rm \
-          -v "$(pwd)"/mount:/deployment \
+          -v "$(pwd)"/mountdata:/deployment \
           busybox /bin/sh -c "ls -l > /deployment/ls.txt"
 
       # Runs a single command using the runners shell
       - name: run docker container 3
         run: |
           docker run -t --rm \
-          -v "$(pwd)"/mount:/deployment \
+          -v "$(pwd)"/mountdata:/deployment \
           busybox /bin/sh -c "ps aux > /deployment/ps.txt"
 
       # Runs a single command using the runners shell
       - name: checking
         run: |
-          ls -l $PWD/mount
+          ls -l $PWD/mountdata

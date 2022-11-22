@@ -26,12 +26,18 @@ jobs:
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+
+      # Runs a single command using the runners shell
+      - name: checking
+        run: |
+          ls -l /deployment
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
-      - name: Run a one-line script
-        run: ls -l deployment
+      - name: checking
+        run: ls -l /deployment
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -61,4 +67,4 @@ jobs:
       # Runs a single command using the runners shell
       - name: checking
         run: |
-          ls -l $PWD/mountdata
+          ls -l /deployment

@@ -40,7 +40,7 @@ jobs:
       - name: run docker container 1
         run: |
           docker run -t --rm \
-          -v "$(pwd)"/mount:/deployment \
+          --mount type=volume,dst=/deployment,volume-driver=local,volume-opt=type=none,volume-opt=o=bind,volume-opt=device="$(pwd)"/mount \
           busybox /bin/sh -c "ls -l /deployment/"
 
       # Runs a single command using the runners shell

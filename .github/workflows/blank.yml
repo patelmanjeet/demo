@@ -19,8 +19,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    container:
-      image: docker
+
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
@@ -47,14 +46,14 @@ jobs:
       - name: run docker container 2
         run: |
           docker run -t --rm \
-          -v "$(pwd)"/mount:/deployment \
+          --mount type=volume,dst=/deployment,volume-driver=local,volume-opt=type=none,volume-opt=o=bind,volume-opt=device="$(pwd)"/mount \
           busybox /bin/sh -c "ls -l > /deployment/ls.txt"
 
       # Runs a single command using the runners shell
       - name: run docker container 3
         run: |
           docker run -t --rm \
-          -v "$(pwd)"/mount:/deployment \
+          --mount type=volume,dst=/deployment,volume-driver=local,volume-opt=type=none,volume-opt=o=bind,volume-opt=device="$(pwd)"/mount \
           busybox /bin/sh -c "ps aux > /deployment/ps.txt"
 
       # Runs a single command using the runners shell

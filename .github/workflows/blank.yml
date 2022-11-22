@@ -36,14 +36,14 @@ jobs:
         run: |
           docker run -t --rm \
           -v "$(pwd)"/mount:/deployment \
-          busybox ls -l > /deployment/ls.txt
+          busybox "ls -l > /deployment/ls.txt"
 
       # Runs a single command using the runners shell
       - name: run docker container 1
         run: |
           docker run -t --rm \
           -v "$(pwd)"/mount:/deployment \
-          busybox ps aux > /deployment/ps.txt
+          busybox "ps aux > /deployment/ps.txt"
 
       # Runs a single command using the runners shell
       - name: run docker container 1

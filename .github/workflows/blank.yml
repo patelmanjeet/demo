@@ -29,7 +29,7 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: mkdir -p $PWD/mount
+        run: echo $PWD
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
@@ -39,7 +39,6 @@ jobs:
       - name: run docker container 1
         run: |
           docker run -t --rm \
-          -v "/var/run/docker.sock":"/var/run/docker.sock" \
           --mount type=volume,dst=/deployment,volume-driver=local,volume-opt=type=none,volume-opt=o=bind,volume-opt=device="$(pwd)"/mount \
           busybox /bin/sh -c "ls -l /deployment/"
 

@@ -36,4 +36,4 @@ jobs:
         run: |
           docker run -t --rm \
           -v "$(pwd)"/mount:/deployment \
-          busybox /bin/bash ls -l
+          busybox ls -l

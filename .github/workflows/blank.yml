@@ -31,17 +31,17 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: ls -l $PWD
+        run: ls -l deployment
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: echo "test" > $PWD/mountdata/fromhost.txt
+        run: echo "test" > /deployment/fromhost.txt
 
       # Runs a single command using the runners shell
       - name: run docker container 1
         run: |
           docker run -t --rm \
-          -v "$(pwd)"/mountdata:/deployment \
+          -v "/deployment:/deployment \
           busybox /bin/sh -c "ls -l /deployment/"
 
       # Runs a single command using the runners shell

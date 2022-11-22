@@ -27,41 +27,42 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
 
-      # Runs a single command using the runners shell
-      - name: checking
-        run: |
-          ls -l /deployment
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
       # Runs a single command using the runners shell
       - name: checking
-        run: ls -l /deployment
+        run: |
+          ls -l /deployment
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
         run: echo "test" > /deployment/fromhost.txt
 
       # Runs a single command using the runners shell
+      - name: checking
+        run: ls -l /deployment
+
+      # Runs a single command using the runners shell
       - name: run docker container 1
         run: |
           docker run -t --rm \
-          -v "/deployment:/deployment \
+          -v "/deployment:/deployment" \
           busybox /bin/sh -c "ls -l /deployment/"
 
       # Runs a single command using the runners shell
       - name: run docker container 2
         run: |
           docker run -t --rm \
-          -v "$(pwd)"/mountdata:/deployment \
+          -v "$(pwd)"/mountdata:/deployment" \
           busybox /bin/sh -c "ls -l > /deployment/ls.txt"
 
       # Runs a single command using the runners shell
       - name: run docker container 3
         run: |
           docker run -t --rm \
-          -v "$(pwd)"/mountdata:/deployment \
+          -v "$(pwd)"/mountdata:/deployment" \
           busybox /bin/sh -c "ps aux > /deployment/ps.txt"
 
       # Runs a single command using the runners shell

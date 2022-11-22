@@ -35,7 +35,7 @@ jobs:
         run: |
           mkdir -p $PWD/mount
           docker run \
-          --mount type=volume,dst=/deployment,volume-driver=local,volume-opt=type=none,volume-opt=o=bind,volume-opt=device=$PWD/mount \
+          -v "$(pwd)"/mount:/deployment \
           hello-world
 
       # Runs a set of commands using the runners shell

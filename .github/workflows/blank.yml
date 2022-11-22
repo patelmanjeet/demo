@@ -34,6 +34,6 @@ jobs:
       # Runs a single command using the runners shell
       - name: run docker container 1
         run: |
-          docker run -it --rm \
+          docker run -t --rm \
           -v "$(pwd)"/mount:/deployment \
           maven:latest mvn version
